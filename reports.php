@@ -1,12 +1,12 @@
 <?php
-// Replace with your actual MySQL credentials
+
 $conn = new mysqli("localhost", "root", "", "musicstore_database");
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Get counts for dashboard summary
+
 $total_products_query = "SELECT COUNT(*) as count FROM products";
 $total_orders_query = "SELECT COUNT(*) as count FROM orders";
 $total_customers_query = "SELECT COUNT(*) as count FROM users WHERE user_role = 'customer'";
@@ -22,7 +22,7 @@ $total_orders = $orders_result->fetch_assoc()['count'];
 $total_customers = $customers_result->fetch_assoc()['count'];
 $low_stock = $low_stock_result->fetch_assoc()['count'];
 
-// Handle report view switching
+
 $current_report = isset($_GET['report']) ? $_GET['report'] : '';
 ?>
 
@@ -33,10 +33,9 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> K&P Music  Reports</title>
-    <!-- Add Font Awesome for PDF icon -->
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Add jsPDF libraries -->
-    <!-- Check and replace the library links with these ones -->
+ 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
     <link rel="stylesheet" href="css/reports.css">
@@ -122,14 +121,13 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
 
         <div class="report-buttons">
             <button class="report-button <?php if ($current_report == 'sales') echo 'active'; ?>" onclick="window.location.href='?report=sales'">Sales Report</button>
-            <button class="report-button <?php if ($current_report == 'inventory') echo 'active'; ?>" onclick="window.location.href='?report=inventory'">Inventory Report</button>
             <button class="report-button <?php if ($current_report == 'category') echo 'active'; ?>" onclick="window.location.href='?report=category'">Category Performance</button>
             <button class="report-button <?php if ($current_report == 'customer') echo 'active'; ?>" onclick="window.location.href='?report=customer'">Customer History</button>
         </div>
 
         <div class="report-container">
             <?php if ($current_report == 'sales'): ?>
-                <!-- Sales Report -->
+               
                 <div class="report-header">
                     <h2>Sales Report</h2>
                     <button class="export-pdf-btn" id="exportPdf">
@@ -138,7 +136,7 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
                 </div>
 
                 <?php
-                // Get date parameters (or set defaults)
+                
                 $start_date = isset($_POST['start_date']) ? $_POST['start_date'] : date('Y-m-d', strtotime('-30 days'));
                 $end_date = isset($_POST['end_date']) ? $_POST['end_date'] : date('Y-m-d');
 
@@ -196,7 +194,7 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
                                 echo "<td>" . $row['customer_name'] . "</td>";
                                 echo "<td>" . $row['order_type'] . "</td>";
                                 echo "<td>" . $row['number_of_items'] . "</td>";
-                                echo "<td>$" . number_format($row['total_cost'], 2) . "</td>";
+                                echo "<td>₹" . number_format($row['total_cost'], 2) . "</td>";
                                 echo "<td>" . $row['order_status'] . "</td>";
                                 echo "<td>" . $row['payment_status'] . "</td>";
                                 echo "</tr>";
@@ -216,13 +214,13 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
 
                 <div style="margin-top: 20px;" id="salesSummary">
                     <h3>Summary</h3>
-                    <p>Total Sales: $<?php echo number_format($total_sales, 2); ?></p>
+                    <p>Total Sales: ₹<?php echo number_format($total_sales, 2); ?></p>
                     <p>Purchase Orders: <?php echo $buy_count; ?></p>
                     <p>Rental Orders: <?php echo $rent_count; ?></p>
                 </div>
 
             <?php elseif ($current_report == 'inventory'): ?>
-                <!-- Inventory Report -->
+               
                 <div class="report-header">
                     <h2>Inventory Report</h2>
                     <button class="export-pdf-btn" id="exportPdf">
@@ -231,10 +229,10 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
                 </div>
 
                 <?php
-                // Get category filter
+            
                 $category_filter = isset($_GET['category']) ? intval($_GET['category']) : 0;
 
-                // Query for inventory
+                
                 $sql = "SELECT p.product_id, p.product_name, c.category_name, 
                             p.product_price, p.rental_cost, p.stock_quantity,
                             (SELECT COUNT(*) FROM order_items oi 
@@ -274,63 +272,9 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
                     </form>
                 </div>
 
-                <table id="inventoryTable">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Product Name</th>
-                            <th>Category</th>
-                            <th>Sale Price</th>
-                            <th>Rental Cost</th>
-                            <th>Stock</th>
-                            <th>Times Sold</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
-                        $total_products = 0;
-                        $low_stock_count = 0;
-                        $out_of_stock_count = 0;
-
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                $class = '';
-                                if ($row['stock_quantity'] <= 0) {
-                                    $class = 'class="low-stock"';
-                                    $out_of_stock_count++;
-                                } elseif ($row['stock_quantity'] < 5) {
-                                    $class = 'class="low-stock"';
-                                    $low_stock_count++;
-                                }
-
-                                echo "<tr $class>";
-                                echo "<td>" . $row['product_id'] . "</td>";
-                                echo "<td>" . $row['product_name'] . "</td>";
-                                echo "<td>" . $row['category_name'] . "</td>";
-                                echo "<td>$" . number_format($row['product_price'], 2) . "</td>";
-                                echo "<td>$" . number_format($row['rental_cost'], 2) . "</td>";
-                                echo "<td>" . $row['stock_quantity'] . "</td>";
-                                echo "<td>" . $row['times_sold'] . "</td>";
-                                echo "</tr>";
-
-                                $total_products++;
-                            }
-                        } else {
-                            echo "<tr><td colspan='7'>No products found</td></tr>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
-
-                <div style="margin-top: 20px;" id="inventorySummary">
-                    <h3>Summary</h3>
-                    <p>Total Products: <?php echo $total_products; ?></p>
-                    <p>Low Stock Items (< 5): <?php echo $low_stock_count; ?></p>
-                            <p>Out of Stock Items: <?php echo $out_of_stock_count; ?></p>
-                </div>
 
             <?php elseif ($current_report == 'category'): ?>
-                <!-- Category Performance Report -->
+        
                 <div class="report-header">
                     <h2>Category Performance Report</h2>
                     <button class="export-pdf-btn" id="exportPdf">
@@ -339,7 +283,7 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
                 </div>
 
                 <?php
-                // Get date parameters
+           
                 $period = isset($_GET['period']) ? $_GET['period'] : 'month';
 
                 switch ($period) {
@@ -432,7 +376,7 @@ $current_report = isset($_GET['report']) ? $_GET['report'] : '';
 
                 <div style="margin-top: 20px;" id="categorySummary">
                     <h3>Summary</h3>
-                    <p>Total Revenue: $<?php echo number_format($total_revenue, 2); ?></p>
+                    <p>Total Revenue: ₹<?php echo number_format($total_revenue, 2); ?></p>
                     <p>Number of Categories with Sales: <?php echo count($category_data); ?></p>
                 </div>
 

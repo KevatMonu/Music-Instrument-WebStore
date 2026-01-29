@@ -47,12 +47,7 @@ $full_name = htmlspecialchars($_SESSION['full_name']);
                     <span>Manage Users</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a href="manage_categories.php" class="nav-link">
-                    <i class="fas fa-tags"></i>
-                    <span>Categories</span>
-                </a>
-            </li>
+            
             <li class="nav-item">
                 <a href="manage_products.php" class="nav-link">
                     <i class="fas fa-guitar"></i>
@@ -162,56 +157,7 @@ $full_name = htmlspecialchars($_SESSION['full_name']);
                 </div>
             </div>
             
-            <div class="stat-card">
-                <div class="card-title">Total Revenue</div>
-                <div class="card-value">
-                    <?php
-                    $revenue = 0;
-                    
-                    // Check if orders table exists
-                    $tableCheckQuery = "SHOW TABLES LIKE 'orders'";
-                    $tableExists = $conn->query($tableCheckQuery);
-                    
-                    if ($tableExists && $tableExists->num_rows > 0) {
-                        // Look for columns like 'total_amount', 'amount', etc.
-                        $columnCheckQueries = [
-                            "SHOW COLUMNS FROM orders LIKE 'total_amount'",
-                            "SHOW COLUMNS FROM orders LIKE 'total'",
-                            "SHOW COLUMNS FROM orders LIKE 'amount'",
-                            "SHOW COLUMNS FROM orders LIKE 'price'"
-                        ];
-                        
-                        $amountColumn = null;
-                        foreach ($columnCheckQueries as $query) {
-                            $columnExists = $conn->query($query);
-                            if ($columnExists && $columnExists->num_rows > 0) {
-                                $column = $columnExists->fetch_assoc();
-                                $amountColumn = $column['Field'];
-                                break;
-                            }
-                        }
-                        
-                        if ($amountColumn) {
-                            $revenueQuery = "SELECT SUM($amountColumn) as total FROM orders";
-                            $revenueResult = $conn->query($revenueQuery);
-                            if ($revenueResult && $revenueResult->num_rows > 0) {
-                                $row = $revenueResult->fetch_assoc();
-                                // Check if 'total' is null before using it
-                                if ($row['total'] !== null) {
-                                    $revenue = $row['total'];
-                                }
-                            }
-                        }
-                    }
-                    
-                    echo '₹' . number_format((float)$revenue, 2);
-                    ?>
-                </div>
-                <i class="fa-solid fa-indian-rupee-sign card-icon"></i>
-                <div class="card-footer">
-                <i class="fa-solid fa-indian-rupee-sign"></i></i>&nbsp; All time revenue
-                </div>
-            </div>
+           
         </div>
         
         <div class="quick-actions">

@@ -145,9 +145,9 @@ function getProductImageSrc($product) {
                     <span class="product-category"><?php echo htmlspecialchars($product['category_name']); ?></span>
                     
                     <div class="product-price-container">
-                        <span class="product-price">$<?php echo number_format($product['product_price'], 2); ?></span>
+                        <span class="product-price">₹<?php echo number_format($product['product_price'], 2); ?></span>
                         <?php if (isset($product['rental_cost']) && $product['rental_cost']): ?>
-                            <span class="product-rental">Rental: $<?php echo number_format($product['rental_cost'], 2); ?>/day</span>
+                            <span class="product-rental">Rental: ₹<?php echo number_format($product['rental_cost'], 2); ?>/day</span>
                         <?php endif; ?>
                     </div>
                     

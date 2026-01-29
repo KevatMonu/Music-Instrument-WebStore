@@ -261,14 +261,14 @@ if (!isset($_GET['view_order'])) {
             <div class="sidebar-header">
                 <div class="brand">
                     <i class="lucide-music"></i>
-                    <span>Music Store</span>
+                    <span>K&P Musicals</span>
                 </div>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
                     <a href="user_dashboard.php" class="nav-link">
                         <i class="lucide-home"></i>
-                        <span>Dashboard</span>
+                        <span>  Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -354,7 +354,7 @@ if (!isset($_GET['view_order'])) {
                     </div>
                     <div class="summary-item">
                         <h4>Total Amount</h4>
-                        <p>$<?php echo number_format($orderDetails['total_cost'], 2); ?></p>
+                        <p>₹<?php echo number_format($orderDetails['total_cost'], 2); ?></p>
                     </div>
                 </div>
                 
@@ -369,9 +369,9 @@ if (!isset($_GET['view_order'])) {
                             <img src="<?php echo !empty($item['product_image']) ? $item['product_image'] : 'images/default-product.jpg'; ?>" alt="<?php echo $item['product_name']; ?>" class="item-image">
                             <div class="item-details">
                                 <h4 class="item-name"><?php echo $item['product_name']; ?></h4>
-                                <p class="item-price">Unit Price: $<?php echo number_format($item['item_price'], 2); ?></p>
+                                <p class="item-price">Unit Price: ₹<?php echo number_format($item['item_price'], 2); ?></p>
                                 <p class="item-quantity">Quantity: <?php echo $item['item_quantity']; ?></p>
-                                <p class="item-total">Total: $<?php echo number_format($item['item_price'] * $item['item_quantity'], 2); ?></p>
+                                <p class="item-total">Total: ₹<?php echo number_format($item['item_price'] * $item['item_quantity'], 2); ?></p>
                             </div>
                         </div>
                         <?php endforeach; ?>
@@ -379,15 +379,15 @@ if (!isset($_GET['view_order'])) {
                         <div class="order-totals">
                             <div class="total-row">
                                 <div class="total-label">Subtotal:</div>
-                                <div class="total-value">$<?php echo number_format($orderDetails['total_cost'] - ($orderDetails['total_cost'] * 0.1), 2); ?></div>
+                                <div class="total-value">₹<?php echo number_format($orderDetails['total_cost'] - ($orderDetails['total_cost'] * 0.1), 2); ?></div>
                             </div>
                             <div class="total-row">
                                 <div class="total-label">Tax (10%):</div>
-                                <div class="total-value">$<?php echo number_format($orderDetails['total_cost'] * 0.1, 2); ?></div>
+                                <div class="total-value">₹<?php echo number_format($orderDetails['total_cost'] * 0.1, 2); ?></div>
                             </div>
                             <div class="total-row grand-total">
                                 <div class="total-label">Grand Total:</div>
-                                <div class="total-value">$<?php echo number_format($orderDetails['total_cost'], 2); ?></div>
+                                <div class="total-value">₹<?php echo number_format($orderDetails['total_cost'], 2); ?></div>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -472,7 +472,7 @@ if (!isset($_GET['view_order'])) {
                         <tr>
                             <td>#<?php echo $order['order_id']; ?></td>
                             <td><?php echo date('M d, Y - h:i A', strtotime($order['order_created'])); ?></td>
-                            <td>$<?php echo number_format($order['total_cost'], 2); ?></td>
+                            <td>₹<?php echo number_format($order['total_cost'], 2); ?></td>
                             <td>
                                 <?php 
                                 $statusClass = '';

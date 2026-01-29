@@ -151,15 +151,7 @@ function getStatusBadgeClass($status) {
                     </div>
                 </a>
 
-                <a href="cart.php" class="dashboard-card card-cart">
-                    <div class="card-content">
-                        <div class="card-info">
-                            <h3>Cart Items</h3>
-                            <div class="value"><?php echo $cart_count; ?></div>
-                        </div>
-                        <div class="card-icon"><i class="lucide-shopping-cart"></i></div>
-                    </div>
-                </a>
+                
             </div>
 
             <!-- Recent Orders Section -->
@@ -177,7 +169,6 @@ function getStatusBadgeClass($status) {
                             <th>Date</th>
                             <th>Amount</th>
                             <th>Status</th>
-                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -185,9 +176,8 @@ function getStatusBadgeClass($status) {
                         <tr>
                             <td class="order-id">#<?php echo $order['order_id']; ?></td>
                             <td><?php echo formatDate($order['order_created']); ?></td>
-                            <td>$<?php echo number_format($order['total_amount'], 2); ?></td>
+                            <td>₹<?php echo number_format($order['total_amount'], 2); ?></td>
                             <td><span class="status-badge <?php echo getStatusBadgeClass($order['status']); ?>"><?php echo $order['status']; ?></span></td>
-                            <td><a href="order_details.php?id=<?php echo $order['order_id']; ?>" class="action-btn">View Details</a></td>
                         </tr>
                         <?php endwhile; ?>
                     </tbody>
