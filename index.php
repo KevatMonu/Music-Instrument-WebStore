@@ -97,20 +97,20 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
           <a href="index.php">
             <li>Home</li>
           </a>
-          <a href="products.php">
+          <a href="../shop/products.php">
             <li>Product</li>
           </a>
-          <a href="about.php">
+          <a href="../pages/about.php">
             <li>About Us</li>
           </a>
-          <a href="contact.php">
+          <a href="../pages/contact.php">
             <li>Contact Us</li>
           </a>
-          <a href="chatbot.html">
+          <a href="../chatboat/chatbot.html">
             <li>Recommendation</li>
           </a>
           <?php if (!isset($_SESSION['user_id'])): ?>
-            <a href="sign-in.php">
+            <a href="../auth/sign-in.php">
               <li>Sign In</li>
             </a>
           <?php endif; ?>
@@ -120,13 +120,13 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
     </div>
     <div class="nav2">
       <div class="nav2-icon">
-        <a href="cart.php" class="cart-link">
+        <a href="../shop/cart.php" class="cart-link">
           <i class="fa-solid fa-cart-shopping"></i>
           <?php if ($totalItems > 0): ?>
             <span class="cart-count"><?php echo $totalItems; ?></span>
           <?php endif; ?>
         </a>
-        <a href="user_dashboard.php"><i class="fa-solid fa-user"></i></a>
+        <a href="../user/user_dashboard.php"><i class="fa-solid fa-user"></i></a>
       </div>
     </div>
   </div>
@@ -138,7 +138,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
           <h1>Find your perfect Sound </h1>
           <p>Explore Our Instructment Collections
           </p>
-          <a href="products.php"> <button class="shop-now-btn  button">Shop-Now</button></a>
+          <a href="../shop/products.php"> <button class="shop-now-btn  button">Shop-Now</button></a>
         </div>
       </div>
     </div>
@@ -213,7 +213,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
                 </div>
                 <div class="product-text">
                     <h1>' . $categoryName . '</h1>
-                    <a href="products.php?category=' . $categoryId . '"><button class="shop-btn">Shop Now</button></a>
+                    <a href="../shop/products.php?category=' . $categoryId . '"><button class="shop-btn">Shop Now</button></a>
                 </div>
             </div>';
               }
@@ -244,7 +244,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#"> 18 Pipes Pan Flute F Key</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
             </div>
           </div>
 
@@ -265,7 +265,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#">70s Jaguar-Electric-Guitar</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
             </div>
           </div>
 
@@ -284,7 +284,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#"> 88-Key Digital Piano</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
 
 
             </div>
@@ -305,7 +305,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#">Affordable Home Piano</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
 
 
             </div>
@@ -326,7 +326,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#">AS-400 Alto Saxophone</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
 
               <i class="ri-heart-line"></i>
             </div>
@@ -347,7 +347,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#">Beginner's Classical Guitar</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
 
 
             </div>
@@ -368,7 +368,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#">Brown Vertical Bamboo Flute</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
 
             </div>
           </div>
@@ -388,7 +388,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
               <a href="#"> Cutway Style With 6 Strings</a>
             </div>
             <div class="sell-icon">
-              <a href="products.php"><i class="ri-shopping-bag-4-line"></i></a>
+              <a href="../shop/products.php"><i class="ri-shopping-bag-4-line"></i></a>
             </div>
           </div>
         </div>
@@ -500,7 +500,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
         skill. Explore all our collections and find the instrument that
         speaks to you at our musical instrument shop.
       </p>
-      <a href="products.php"> <button class="button">Shop Now</button></a>
+      <a href="../shop/products.php"> <button class="button">Shop Now</button></a>
     </div>
     <div class="page4-right">
       <div class="right-image-one">
@@ -629,7 +629,7 @@ $totalItems = array_sum($_SESSION['cart'] ?? []);
         iconElement.removeClass('ri-shopping-bag-4-line').addClass('ri-loader-4-line fa-spin');
 
         // Send AJAX request to add item to cart
-        $.get("products.php?action=add&id=" + productId, function(response) {
+        $.get("../shop/products.php?action=add&id=" + productId, function(response) {
           try {
             let data = JSON.parse(response);
             if (data.success) {

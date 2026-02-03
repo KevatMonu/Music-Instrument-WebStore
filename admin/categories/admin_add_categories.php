@@ -3,7 +3,7 @@ session_start();
 
 // Check if the user is logged in and is an admin
 if (!isset($_SESSION['user_id']) || $_SESSION['user_role'] !== 'admin') {
-    echo "<script>alert('Unauthorized access!'); window.location.href='sign-in.php';</script>";
+    echo "<script>alert('Unauthorized access!'); window.location.href='../auth/sign-in.php';</script>";
     exit();
 }
 
@@ -97,15 +97,15 @@ $full_name = $_SESSION['full_name'];
 
         <h2>Admin Panel</h2>
         <ul>
-            <li><a href="admin_dashboard.php">Dashboard</a></li>
-            <li><a href="manage_users.php">Manage Users</a></li>
-            <li><a href="manage_categories.php">Manage Categories</a></li>
-            <li><a href="admin_add_product.php">Add Products</a></li>
-            <li><a href="manage_orders.php">View Orders</a></li>
-            <li><a href="reports.php">Reports</a></li>
+            <li><a href="../admin/dashboard/admin_dashboard.php">Dashboard</a></li>
+            <li><a href="../admin/users/manage_users.php">Manage Users</a></li>
+            <li><a href="../admin/categories/manage_categories.php">Manage Categories</a></li>
+            <li><a href="../admin/products/admin_add_product.php">Add Products</a></li>
+            <li><a href="../admin/orders/manage_orders.php">View Orders</a></li>
+            <li><a href="../admin/reports/reports.php">Reports</a></li>
         </ul>
         <div class="logout-btn">
-            <a href="logout.php">Logout</a>
+            <a href="../auth/logout.php">Logout</a>
         </div>
     
 
